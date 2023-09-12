@@ -1,96 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html'%}
+{% block menu%}
+<a href="{% url 'home'%}" class="btn btn-success">Главная</a>
+<a href="{% url 'opt' meta.date%}" class="btn btn-success">Опт</a>
+<a href="{% url 'retail' meta.date %}" class="btn btn-success">Розница</a>
+{% endblock%}
+{% block content%}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
-</head>
+{{meta.opt}} - от {{meta.date}}
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <td rowspan="2">Еденица измерения</td>
+            <td rowspan="2">Тип топлива</td>
+            <td colspan="3">Показатели за месяц</td>
+            <td colspan="2">Показатели за квартал</td>
+            <td colspan="2">Показатели за год</td>
+        </tr>
+        <tr>
+            <td>Текущий</td>
+            <td>Факт текущий</td>
+            <td>Предыдущий месяц</td>
 
-<body>
-    <div class="container-md mt-3">
-        {{meta.opt}} - от {{meta.date}}
-        <table class="table table-bordered">
-            <tbody>
-                <tr>
-                    <td rowspan="2">Еденица измерения</td>
-                    <td rowspan="2">Тип топлива</td>
-                    <td colspan="3">Показатели за месяц</td>
-                    <td colspan="2">Показатели за квартал</td>
-                    <td colspan="2">Показатели за год</td>
-                </tr>
-                <tr>
-                    <td>Текущий</td>
-                    <td>Факт текущий</td>
-                    <td>Предыдущий месяц</td>
+            <td>Квартал</td>
+            <td>Факт квартал</td>
 
-                    <td>Квартал</td>
-                    <td>Факт квартал</td>
+            <td>За год</td>
+            <td>Факт за год</td>
 
-                    <td>За год</td>
-                    <td>Факт за год</td>
+        </tr>
+        {% if opt_all%}
+        {% for o in opt_all%}
+        <tr>
+            <td class="unitate">{{o.unitate}}</td>
+            <td class="type_oil">{{o.typeOil}}</td>
+            <td class="summ_month">{{o.summMonth}}</td>
+            <td class="summ_fact_month">{{o.summFactMonth}}</td>
+            <td class="summ_fact_before_month">{{o.summFactBeforeMonth}}</td>
 
-                </tr>
+            <td class="summ_quarter">{{o.summQuarter}}</td>
+            <td class="summ_fact_quartet">{{o.summFactQuarter}}</td>
 
-                {% for o in opt_all%}
-                <tr>
-                    <td>{{o.unitate}}</td>
-                    <td>{{o.typeOil}}</td>
-                    <td>{{o.summMonth}}</td>
-                    <td>{{o.summFactMonth}}</td>
-                    <td>{{o.summFactBeforeMonth}}</td>
+            <td class="summ_year">{{o.summYear}}</td>
+            <td class="summ_fact_year">{{o.summFactYear}}</td>
 
-                    <td>{{o.summQuarter}}</td>
-                    <td>{{o.summFactQuarter}}</td>
+        </tr>
+        {%endfor%}
+        {%endif%}
+        {% if retail_value%}
+        {% for r in retail_value%}
+        <tr>
+            <td>{{r.unitate}}</td>
+            <td>{{r.typeOil}}</td>
+            <td>{{r.summMonth}}</td>
+            <td>{{r.summFactMonth}}</td>
+            <td>
+                <p {% if r.summFactBeforeMonth < 0%} class="text-danger" {%endif%}>{{r.summFactBeforeMonth}}</p>
+            </td>
+            <td>{{r.summQuarter}}</td>
+            <td>{{r.summFactQuarter}}</td>
+            <td>{{r.summYear}}</td>
+            <td>{{r.summFactYear}}</td>
+        </tr>
+        {%endfor%}
+        {%endif%}
 
-                    <td>{{o.summYear}}</td>
-                    <td>{{o.summFactYear}}</td>
+    </tbody>
+</table>
 
-                </tr>
-                {%endfor%}
-
-                <tr>
-                    {% for r in retail_profit%}
-                    <td>{{r.unitate}}</td>
-                    <td>{{r.profitToDayYearR}}</td>
-                    <td>{{r.profitToDayBPR}}</td>
-                    <td>{{r.profitToDayFactR}}</td>
-                    <td>
-                        <p {% if r.profitToDayDifR < 0%} class="text-danger" {%endif%}>{{r.profitToDayDifR}}</p>
-                    </td>
-                    <td>{{r.profitStartMonthYearR}}</td>
-                    <td>{{r.profitStartMonthBPR}}</td>
-                    <td>{{r.profitStartMonthFactR}}</td>
-                    <td>{{r.profitStartMonthPredR}}</td>
-                    <td>{{r.profitDeviationToYearR}}</td>
-                    <td>{{r.profitDeviationBPR}}</td>
-                    {%endfor%}
-                </tr>
-                <tr>
-                    {% for r in retail_income%}
-                    <td>{{r.unitate}}</td>
-                    <td>{{r.incomeToDayYearR}}</td>
-                    <td>{{r.incomeToDayBPR}}</td>
-                    <td>{{r.incomeToDayFactR}}</td>
-                    <td>
-                        <p {% if r.incomeToDayDifR < 0%} class="text-danger" {%endif%}>{{r.incomeToDayDifR}}</p>
-                    </td>
-                    <td>{{r.incomeStartMonthYearR}}</td>
-                    <td>{{r.incomeStartMonthBPR}}</td>
-                    <td>{{r.incomeStartMonthFactR}}</td>
-                    <td>{{r.incomeStartMonthPredR}}</td>
-                    <td>{{r.incomeDeviationToYearR}}</td>
-                    <td>{{r.incomeDeviationBPR}}</td>
-                    {%endfor%}
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</body>
-
-</html>
+{% endblock%}

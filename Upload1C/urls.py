@@ -20,6 +20,7 @@ from .views import *
 
 urlpatterns = [
     path('', date, name='home'),
-    path('date/<path:date>/', index, name='date'),
+    path('date/opt/<path:date>/', opt, name='opt'),
+    path('date/retail/<path:date>/', retail, name='retail'),
     path('search/', date, name='search')
 ]

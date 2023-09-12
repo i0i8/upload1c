@@ -5,16 +5,24 @@ from .models import *
 # Create your views here.
 
 
-def index(request, date):
+def opt(request, date):
     meta = {
         'opt': 'Опт',
-        'retail': 'Розница',
         'date': date
     }
     opt_all = SmallOpt.objects.filter(date=date)
-    retail_value = RetailValue.objects.filter(date=date)
+    return render(request, 'upload1c/result.html', context={'opt_all': opt_all, 'meta': meta})
 
-    return render(request, 'upload1c/result.html', context={'retail_value': retail_value, 'opt_all': opt_all, 'meta': meta})
+
+def retail(request, date):
+    meta = {
+        'opt': 'Розница',
+        'date': date
+    }
+    retail = RetailValue.objects.filter(date=date)
+    for r in retail:
+        print(r.unitate)
+    return render(request, 'upload1c/result.html', context={'retail_value': retail, 'meta': meta})
 
 
 def date(request):
