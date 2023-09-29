@@ -22,5 +22,7 @@ urlpatterns = [
     path('', date, name='home'),
     path('date/opt/<path:date>/', opt, name='opt'),
     path('date/retail/<path:date>/', retail, name='retail'),
+    path('date/base/<path:date>/', fuel_base, name='base'),
+    path('date/mony/<path:date>/', mony, name='mony'),
     path('search/', date, name='search')
 ]

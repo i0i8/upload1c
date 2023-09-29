@@ -1,0 +1,131 @@
+{% extends 'base.html'%}
+{% block menu%}
+<a href="{% url 'home'%}" class="btn btn-success">Главная</a>
+<a href="{% url 'opt' meta.date%}" class="btn btn-success">Опт</a>
+<a href="{% url 'retail' meta.date %}" class="btn btn-success">Розница</a>
+<a href="{% url 'base' meta.date %}" class="btn btn-success">Остаток Базы</a>
+<a href="{% url 'mony' meta.date %}" class="btn btn-success">Деньги</a>
+{% endblock%}
+{% block content%}
+
+{{meta.mony}} - на начало {{meta.date}}
+
+<!-- <table class="table table-bordered">
+    <tbody>
+        <tr>
+            <td rowspan="1">Всего</td>
+            <td rowspan="1">Владелец</td>
+            <td rowspan="1">Сумма день</td>
+            <td rowspan="1">Сумма месяц</td>
+            <td rowspan="1">Сумма год</td>
+        </tr>
+
+        {% if mony%}
+
+        <tr>
+            <td class="summ_fact_before_month">ОПТ</td>
+        </tr>
+
+        {% for m in mony%}
+        <tr>
+            {% if m.typeSela == 'ОПТ'%}
+            <td></td>
+            <td class="mony_owner">{{m.owner}}</td>
+            <td class="summ_day">{{m.summDay | floatformat:"2g"}}</td>
+            <td class="summ_month">{{m.summMonth | floatformat:"2g"}}</td>
+            <td class="summ_year">{{m.summYear | floatformat:"2g"}}</td>
+            {% endif%}
+        </tr>
+        {%endfor%}
+        </tr>
+
+        <tr>
+            <td class="summ_fact_before_month">Розница</td>
+        </tr>
+
+        {% for m in mony%}
+        <tr>
+            {% if m.typeSela == 'Розница'%}
+            <td></td>
+            <td class="mony_owner">{{m.owner}}</td>
+            <td class="summ_day">{{m.summDay | floatformat:"2g"}}</td>
+            <td class="summ_month">{{m.summMonth | floatformat:"2g"}}</td>
+            <td class="summ_year">{{m.summYear | floatformat:"2g"}}</td>
+            {% endif%}
+        </tr>
+        {%endfor%}
+
+        {%endif%}
+    </tbody>
+</table> -->
+
+
+
+<button class="accordion">Всего</button>
+<div class="panel">
+
+    <button class="accordion">Опт</button>
+    <div class="panel">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td rowspan="1">Владелец</td>
+                    <td rowspan="1">Сумма день</td>
+                    <td rowspan="1">Сумма месяц</td>
+                    <td rowspan="1">Сумма год</td>
+                </tr>
+                <tr>
+                    <td>Всего</td>
+                    <td class="result_day_opt"></td>
+                    <td class="result_month_opt"></td>
+                    <td class="result_year_opt"></td>
+                </tr>
+                {% for m in mony%}
+                <tr>
+                    {% if m.typeSela == 'ОПТ'%}
+
+                    <td class="mony_owner_opt">{{m.owner}}</td>
+                    <td class="summ_day_opt">{{m.summDay | floatformat:"2g"}}</td>
+                    <td class="summ_month_opt">{{m.summMonth | floatformat:"2g"}}</td>
+                    <td class="summ_year_opt">{{m.summYear | floatformat:"2g"}}</td>
+                    {% endif%}
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+
+    <button class="accordion">Розница</button>
+    <div class="panel">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td rowspan="1">Владелец</td>
+                    <td rowspan="1">Сумма день</td>
+                    <td rowspan="1">Сумма месяц</td>
+                    <td rowspan="1">Сумма год</td>
+                </tr>
+                {% for m in mony%}
+                <tr>
+                    {% if m.typeSela == 'Розница'%}
+
+                    <td class="mony_owner">{{m.owner}}</td>
+                    <td class="summ_day">{{m.summDay | floatformat:"2g"}}</td>
+                    <td class="summ_month">{{m.summMonth | floatformat:"2g"}}</td>
+                    <td class="summ_year">{{m.summYear | floatformat:"2g"}}</td>
+                    {% endif%}
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+{% endblock %}

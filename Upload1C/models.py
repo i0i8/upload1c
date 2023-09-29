@@ -66,3 +66,36 @@ class RetailValue(models.Model):
 
     def __str__(self):
         return f'Дата выгрузки - {self.date}'
+
+
+class FuelBase(models.Model):
+    storage = models.CharField(
+        max_length=100, verbose_name='Склад', blank=True)
+    fuel = models.CharField(max_length=20, verbose_name='Номенклатура')
+    balance = models.FloatField(verbose_name='Остаток')
+    owner = models.CharField(max_length=255, verbose_name='Владелец')
+    date = models.DateField(verbose_name='Дата')
+
+    class Meta:
+        verbose_name = 'База'
+        verbose_name_plural = 'Базы'
+
+    def __str__(self):
+        return f'Остаток на начала {self.date}, склад {self.storage} владелец {self.owner}'
+
+
+class Mony(models.Model):
+    unitate = models.CharField(max_length=10, verbose_name='Еденица измерения')
+    summDay = models.FloatField(verbose_name='Сумма день')
+    owner = models.CharField(max_length=150, verbose_name='Организация')
+    typeSela = models.CharField(max_length=50, verbose_name='Вид продажи')
+    summMonth = models.FloatField(verbose_name='Сумма месяц')
+    summYear = models.FloatField(verbose_name='Сумма год')
+    date = models.DateField(verbose_name='Дата')
+
+    class Meta:
+        verbose_name = 'Деньги'
+        verbose_name_plural = 'Деньги'
+
+    def __str__(self):
+        return f'Дата выгрузки {self.date}'

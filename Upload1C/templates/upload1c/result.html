@@ -3,6 +3,8 @@
 <a href="{% url 'home'%}" class="btn btn-success">Главная</a>
 <a href="{% url 'opt' meta.date%}" class="btn btn-success">Опт</a>
 <a href="{% url 'retail' meta.date %}" class="btn btn-success">Розница</a>
+<a href="{% url 'base' meta.date %}" class="btn btn-success">Остаток Базы</a>
+<a href="{% url 'mony' meta.date %}" class="btn btn-success">Деньги</a>
 {% endblock%}
 {% block content%}
 

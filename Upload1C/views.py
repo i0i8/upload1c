@@ -20,9 +20,25 @@ def retail(request, date):
         'date': date
     }
     retail = RetailValue.objects.filter(date=date)
-    for r in retail:
-        print(r.unitate)
     return render(request, 'upload1c/result.html', context={'retail_value': retail, 'meta': meta})
+
+
+def fuel_base(request, date):
+    meta = {
+        'base': 'Остаток на базах',
+        'date': date
+    }
+    base = FuelBase.objects.filter(date=date)
+    return render(request, 'upload1c/fuel_base.html', context={'base': base, 'meta': meta})
+
+
+def mony(request, date):
+    meta = {
+        'mony': 'Деньги на начло',
+        'date': date
+    }
+    mony = Mony.objects.filter(date=date)
+    return render(request, 'upload1c/mony.html', context={'mony': mony, 'meta': meta})
 
 
 def date(request):
