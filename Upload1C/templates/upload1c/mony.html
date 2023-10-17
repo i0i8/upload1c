@@ -10,60 +10,24 @@
 
 {{meta.mony}} - на начало {{meta.date}}
 
-<!-- <table class="table table-bordered">
-    <tbody>
-        <tr>
-            <td rowspan="1">Всего</td>
-            <td rowspan="1">Владелец</td>
-            <td rowspan="1">Сумма день</td>
-            <td rowspan="1">Сумма месяц</td>
-            <td rowspan="1">Сумма год</td>
-        </tr>
-
-        {% if mony%}
-
-        <tr>
-            <td class="summ_fact_before_month">ОПТ</td>
-        </tr>
-
-        {% for m in mony%}
-        <tr>
-            {% if m.typeSela == 'ОПТ'%}
-            <td></td>
-            <td class="mony_owner">{{m.owner}}</td>
-            <td class="summ_day">{{m.summDay | floatformat:"2g"}}</td>
-            <td class="summ_month">{{m.summMonth | floatformat:"2g"}}</td>
-            <td class="summ_year">{{m.summYear | floatformat:"2g"}}</td>
-            {% endif%}
-        </tr>
-        {%endfor%}
-        </tr>
-
-        <tr>
-            <td class="summ_fact_before_month">Розница</td>
-        </tr>
-
-        {% for m in mony%}
-        <tr>
-            {% if m.typeSela == 'Розница'%}
-            <td></td>
-            <td class="mony_owner">{{m.owner}}</td>
-            <td class="summ_day">{{m.summDay | floatformat:"2g"}}</td>
-            <td class="summ_month">{{m.summMonth | floatformat:"2g"}}</td>
-            <td class="summ_year">{{m.summYear | floatformat:"2g"}}</td>
-            {% endif%}
-        </tr>
-        {%endfor%}
-
-        {%endif%}
-    </tbody>
-</table> -->
-
-
-
 <button class="accordion">Всего</button>
 <div class="panel">
-
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td rowspan="1"></td>
+                <td rowspan="1">Сумма день</td>
+                <td rowspan="1">Сумма месяц</td>
+                <td rowspan="1">Сумма год</td>
+            </tr>
+            <tr>
+                <td>Всего</td>
+                <td class="result_day_all"></td>
+                <td class="result_month_all"></td>
+                <td class="result_year_all"></td>
+            </tr>
+        </tbody>
+    </table>
     <button class="accordion">Опт</button>
     <div class="panel">
         <table class="table table-bordered">
@@ -105,14 +69,20 @@
                     <td rowspan="1">Сумма месяц</td>
                     <td rowspan="1">Сумма год</td>
                 </tr>
+                <tr>
+                    <td>Всего</td>
+                    <td class="result_day_ret"></td>
+                    <td class="result_month_ret"></td>
+                    <td class="result_year_ret"></td>
+                </tr>
                 {% for m in mony%}
                 <tr>
                     {% if m.typeSela == 'Розница'%}
 
-                    <td class="mony_owner">{{m.owner}}</td>
-                    <td class="summ_day">{{m.summDay | floatformat:"2g"}}</td>
-                    <td class="summ_month">{{m.summMonth | floatformat:"2g"}}</td>
-                    <td class="summ_year">{{m.summYear | floatformat:"2g"}}</td>
+                    <td class="mony_owner_ret">{{m.owner}}</td>
+                    <td class="summ_day_ret">{{m.summDay | floatformat:"2g"}}</td>
+                    <td class="summ_month_ret">{{m.summMonth | floatformat:"2g"}}</td>
+                    <td class="summ_year_ret">{{m.summYear | floatformat:"2g"}}</td>
                     {% endif%}
                 </tr>
                 {%endfor%}

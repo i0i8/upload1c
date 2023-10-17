@@ -12,42 +12,35 @@
 <table class="table table-bordered">
     <tbody>
         <tr>
-            <td rowspan="2">Еденица измерения</td>
-            <td rowspan="2">Тип топлива</td>
-            <td colspan="3">Показатели за месяц</td>
-            <td colspan="2">Показатели за квартал</td>
-            <td colspan="2">Показатели за год</td>
+            <td>Тип топлива</td>
+            <td>Факт за вчера</td>
+            <td>План ткущий месяц</td>
+            <td>Факт текущий месяц</td>
+            <td>Факт месяц прошлый год</td>
+            <td>Отклонение</td>
         </tr>
         <tr>
-            <td>Текущий</td>
-            <td>Факт текущий</td>
-            <td>Предыдущий месяц</td>
-
-            <td>Квартал</td>
-            <td>Факт квартал</td>
-
-            <td>За год</td>
-            <td>Факт за год</td>
-
+            <td>Всего</td>
+            <td class="opt_allDay"></td>
+            <td class="opt_allPlanMonth"></td>
+            <td class="opt_allFactMonth"></td>
+            <td></td>
+            <td class="opt_allDeviations"></td>
         </tr>
+        <!-- опт -->
         {% if opt_all%}
         {% for o in opt_all%}
         <tr>
-            <td class="unitate">{{o.unitate}}</td>
             <td class="type_oil">{{o.typeOil}}</td>
-            <td class="summ_month">{{o.summMonth}}</td>
-            <td class="summ_fact_month">{{o.summFactMonth}}</td>
-            <td class="summ_fact_before_month">{{o.summFactBeforeMonth}}</td>
-
-            <td class="summ_quarter">{{o.summQuarter}}</td>
-            <td class="summ_fact_quartet">{{o.summFactQuarter}}</td>
-
-            <td class="summ_year">{{o.summYear}}</td>
-            <td class="summ_fact_year">{{o.summFactYear}}</td>
-
+            <td class="opt_day">{{o.summFactDay}}</td>
+            <td class="opt_planMonth">{{o.summMonth}}</td>
+            <td class="opt_factMonth">{{o.summFactMonth}}</td>
+            <td>{{o.summDactMonthBeforeYear}}</td>
+            <td class="opt_deviations"></td>
         </tr>
         {%endfor%}
         {%endif%}
+        <!-- розница -->
         {% if retail_value%}
         {% for r in retail_value%}
         <tr>

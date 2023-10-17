@@ -11,7 +11,7 @@ def opt(request, date):
         'date': date
     }
     opt_all = SmallOpt.objects.filter(date=date)
-    return render(request, 'upload1c/result.html', context={'opt_all': opt_all, 'meta': meta})
+    return render(request, 'upload1c/opt.html', context={'opt_all': opt_all, 'meta': meta})
 
 
 def retail(request, date):
@@ -20,7 +20,7 @@ def retail(request, date):
         'date': date
     }
     retail = RetailValue.objects.filter(date=date)
-    return render(request, 'upload1c/result.html', context={'retail_value': retail, 'meta': meta})
+    return render(request, 'upload1c/retail.html', context={'retail_value': retail, 'meta': meta})
 
 
 def fuel_base(request, date):
@@ -48,3 +48,8 @@ def date(request):
     else:
         date = DateLink.objects.all()
     return render(request, 'upload1c/index.html', context={'date': date})
+
+
+def base_db():
+    ba = FuelBase.objects.values('storage').distinct()
+    return ba

@@ -14,21 +14,25 @@ class SmallOpt(models.Model):
     unitate = models.CharField(
         max_length=10, verbose_name='Еденица измерения', default='тн', null=True, blank=True)
     typeOil = models.CharField(
-        max_length=25, verbose_name='Тип топлива')
+        max_length=25, verbose_name='Тип топлива', blank=True)
     summMonth = models.FloatField(
-        max_length=10, verbose_name='Показатели за месяц')
+        max_length=20, verbose_name='План за месяц', blank=True)
     summQuarter = models.FloatField(
-        max_length=10, verbose_name='Сумма квартал')
+        max_length=20, verbose_name='План квартал', blank=True)
     summYear = models.FloatField(
-        max_length=10, verbose_name='Сумма за год')
+        max_length=20, verbose_name='План на год', blank=True)
     summFactMonth = models.FloatField(
-        max_length=10, verbose_name='Показатели факт за месяц')
+        max_length=20, verbose_name='Показатели факт за месяц', blank=True)
     summFactQuarter = models.FloatField(
-        max_length=10, verbose_name='Сумма факт квартал')
+        max_length=20, verbose_name='Сумма факт квартал', blank=True)
     summFactYear = models.FloatField(
-        max_length=10, verbose_name='Сумма факт за год')
+        max_length=20, verbose_name='Сумма факт за год', blank=True)
     summFactBeforeMonth = models.FloatField(
-        max_length=10, verbose_name='Показатели предыдущий месяц')
+        max_length=20, verbose_name='Показатели предыдущий месяц', blank=True)
+    summFactDay = models.FloatField(
+        max_length=20, verbose_name='Факт за день', blank=True)
+    summDactMonthBeforeYear = models.FloatField(
+        max_length=20, verbose_name='Факт месяц предыдущего года', blank=True)
     date = models.DateField(verbose_name='Дата выгрузки')
 
     class Meta:
@@ -43,21 +47,25 @@ class RetailValue(models.Model):
     unitate = models.CharField(
         max_length=10, verbose_name='Еденица измерения', default='тн', null=True, blank=True)
     typeOil = models.CharField(
-        max_length=25, verbose_name='Тип топлива')
+        max_length=25, verbose_name='Тип топлива', blank=True)
     summMonth = models.FloatField(
-        max_length=10, verbose_name='Показатели за месяц')
+        max_length=20, verbose_name='План месяц', blank=True)
     summQuarter = models.FloatField(
-        max_length=10, verbose_name='Сумма квартал')
+        max_length=20, verbose_name='План квартал', blank=True)
     summYear = models.FloatField(
-        max_length=10, verbose_name='Сумма за год')
+        max_length=20, verbose_name='План год', blank=True)
     summFactMonth = models.FloatField(
-        max_length=10, verbose_name='Показатели факт за месяц')
+        max_length=20, verbose_name='Показатели факт за месяц', blank=True)
     summFactQuarter = models.FloatField(
-        max_length=10, verbose_name='Сумма факт квартал')
+        max_length=20, verbose_name='Сумма факт квартал', blank=True)
     summFactYear = models.FloatField(
-        max_length=10, verbose_name='Сумма факт за год')
+        max_length=20, verbose_name='Сумма факт за год', blank=True)
     summFactBeforeMonth = models.FloatField(
-        max_length=10, verbose_name='Показатели предыдущий месяц')
+        max_length=20, verbose_name='Показатели предыдущий месяц', blank=True)
+    summFactDay = models.FloatField(
+        max_length=20, verbose_name='Факт за день', blank=True)
+    summDactMonthBeforeYear = models.FloatField(
+        max_length=20, verbose_name='Факт месяц предыдущего года', blank=True)
     date = models.DateField(verbose_name='Дата выгрузки')
 
     class Meta:

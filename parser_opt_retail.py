@@ -63,10 +63,20 @@ for i in data['data']:
         else:
             opt['СуммаФактПредМесяц'] = float(
                 i['СуммаФактПредМесяц'].replace(',', '.').replace(u'\xa0', u''))
+        if i['СуммаФактДень'] == '':
+            opt['СуммаФактДень'] = 0
+        else:
+            opt['СуммаФактДень'] = float(
+                i['СуммаФактДень'].replace(',', '.').replace(u'\xa0', u''))
+        if i['СуммаФактМесяцПредГода'] == '':
+            opt['СуммаФактМесяцПредГода'] = 0
+        else:
+            opt['СуммаФактМесяцПредГода'] = float(
+                i['СуммаФактМесяцПредГода'].replace(',', '.').replace(u'\xa0', u''))
         opt['unitate'] = 'тн'
-        sql.execute("INSERT INTO Upload1C_smallopt (typeOil, summMonth, summQuarter, summYear, summFactMonth, summFactQuarter, summFactYear, summFactBeforeMonth, date, unitate) VALUES (?,?,?,?,?,?,?,?,?,?)",
+        sql.execute("INSERT INTO Upload1C_smallopt (typeOil, summMonth, summQuarter, summYear, summFactMonth, summFactQuarter, summFactYear, summFactBeforeMonth,summFactDay,summDactMonthBeforeYear, date, unitate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
                     (opt['ВидТоплива'], opt['СуммаМесяц'], opt['СуммаКвартал'], opt['СуммаГод'], opt['СуммаФактМесяц'], opt['СуммаФактКвартал'],
-                     opt['СуммаФактГод'], opt['СуммаФактПредМесяц'], current_date, opt['unitate']))
+                     opt['СуммаФактГод'], opt['СуммаФактПредМесяц'], opt['СуммаФактДень'], opt['СуммаФактМесяцПредГода'], current_date, opt['unitate']))
         db.commit()
     if i['ВидПродаж'] == 'Розница':
         if i['ВидТоплива'] == '':
@@ -78,7 +88,7 @@ for i in data['data']:
             retail['СуммаМесяц'] = 0
         else:
             retail['СуммаМесяц'] = float(
-                i['СуммаМесяц'].replace(',', '.').replace(u'\xa0', u''))
+                i['СуммаМесяц'].replace(',', '.').replace(u'\xa0', u'')) // 1000
 
         if i['СуммаКвартал'] == '':
             retail['СуммаКвартал'] = 0
@@ -115,10 +125,20 @@ for i in data['data']:
         else:
             retail['СуммаФактПредМесяц'] = float(
                 i['СуммаФактПредМесяц'].replace(',', '.').replace(u'\xa0', u''))
+        if i['СуммаФактДень'] == '':
+            retail['СуммаФактДень'] = 0
+        else:
+            retail['СуммаФактДень'] = float(
+                i['СуммаФактДень'].replace(',', '.').replace(u'\xa0', u''))
+        if i['СуммаФактМесяцПредГода'] == '':
+            retail['СуммаФактМесяцПредГода'] = 0
+        else:
+            retail['СуммаФактМесяцПредГода'] = float(
+                i['СуммаФактМесяцПредГода'].replace(',', '.').replace(u'\xa0', u''))
         retail['unitate'] = 'тн'
-        sql.execute("INSERT INTO Upload1C_retailvalue (typeOil, summMonth, summQuarter, summYear, summFactMonth, summFactQuarter, summFactYear, summFactBeforeMonth, date, unitate) VALUES (?,?,?,?,?,?,?,?,?,?)", (retail['ВидТоплива'],
+        sql.execute("INSERT INTO Upload1C_retailvalue (typeOil, summMonth, summQuarter, summYear, summFactMonth, summFactQuarter, summFactYear, summFactBeforeMonth,summFactDay,summDactMonthBeforeYear, date, unitate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", (retail['ВидТоплива'],
                     retail['СуммаМесяц'], retail['СуммаКвартал'], retail['СуммаГод'], retail['СуммаФактМесяц'], retail['СуммаФактКвартал'],
-                    retail['СуммаФактГод'], retail['СуммаФактПредМесяц'], current_date, retail['unitate']))
+                    retail['СуммаФактГод'], retail['СуммаФактПредМесяц'], retail['СуммаФактДень'], retail['СуммаФактМесяцПредГода'], current_date, retail['unitate']))
         db.commit()
 
 sql.execute(f"INSERT INTO Upload1C_datelink (date) VALUES (?)", (current_date,))

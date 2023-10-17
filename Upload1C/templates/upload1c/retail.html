@@ -1,0 +1,44 @@
+{% extends 'base.html'%}
+{% block menu%}
+<a href="{% url 'home'%}" class="btn btn-success">Главная</a>
+<a href="{% url 'opt' meta.date%}" class="btn btn-success">Опт</a>
+<a href="{% url 'retail' meta.date %}" class="btn btn-success">Розница</a>
+<a href="{% url 'base' meta.date %}" class="btn btn-success">Остаток Базы</a>
+<a href="{% url 'mony' meta.date %}" class="btn btn-success">Деньги</a>
+{% endblock%}
+{% block content%}
+
+{{meta.opt}} - от {{meta.date}}
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <td>Тип топлива</td>
+            <td>Факт за вчера</td>
+            <td>План ткущий месяц</td>
+            <td>Факт текущий месяц</td>
+            <td>Факт месяц прошлый год</td>
+            <td>Отклонение</td>
+        </tr>
+        <tr>
+            <td>Всего</td>
+            <td class="ret_allDay"></td>
+            <td class="ret_allPlanMonth"></td>
+            <td class="ret_allFactMont"></td>
+            <td></td>
+            <td class="ret_allDeviations"></td>
+        </tr>
+        <!-- розница -->
+        {% for r in retail_value%}
+        <tr>
+            <td>{{r.typeOil}}</td>
+            <td class="ret_day">{{r.summFactDay}}</td>
+            <td class="ret_planMonth">{{r.summMonth}}</td>
+            <td class="ret_factMonth">{{r.summFactMonth}}</td>
+            <td>{{r.summDactMonthBeforeYear}}</td>
+            <td class="ret_deviations"></td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+
+{% endblock%}

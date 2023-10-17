@@ -1,4 +1,5 @@
 {% extends 'base.html'%}
+{% load upload_tags %}
 {% block menu%}
 <a href="{% url 'home'%}" class="btn btn-success">Главная</a>
 <a href="{% url 'opt' meta.date%}" class="btn btn-success">Опт</a>
@@ -9,35 +10,110 @@
 {% block content%}
 
 {{meta.base}} - на начало {{meta.date}}
+{% if base%}
+<button class="accordion">Всего</button>
+<div class="panel">
+    <!-- Орин -->
+    <button class="accordion">Орион</button>
+    <div class="panel">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
 
-<table class="table table-bordered">
-    <tbody>
-        <tr>
-
-            <td rowspan="1">Склад</td>
-            <td rowspan="1">Тип топлива</td>
-            <td rowspan="1">Владелец</td>
-            <td rowspan="1">Конечный остаток</td>
-
-        </tr>
-        {% if base%}
-
-        {% for b in base%}
-        <tr>
-            <td class="storage">{{b.storage}}</td>
-            <td class="type-oil">{{b.fuel}}</td>
-            <td class="summ_fact_before_month">{{b.owner}}</td>
-            <td class="summ_fact_month">{{b.balance}}</td>
-
-        </tr>
-        {%endfor%}
-        {%endif%}
-
-    </tbody>
-</table>
-
-
-
-
-
+                    <td rowspan="1">Склад</td>
+                    <td rowspan="1">Тип топлива</td>
+                    <td rowspan="1">Владелец</td>
+                    <td rowspan="1">Конечный остаток</td>
+                </tr>
+                {% for b in base%}
+                <tr>
+                    {% if b.storage == 'Орион'%}
+                    <td class="storage">{{b.storage}}</td>
+                    <td class="type-oil">{{b.fuel}}</td>
+                    <td class="summ_fact_before_month">{{b.owner}}</td>
+                    <td class="summ_fact_month">{{b.balance}}</td>
+                    {% endif%}
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+    <!-- end Орион -->
+    <!-- НСП -->
+    <button class="accordion">НСП</button>
+    <div class="panel">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td rowspan="1">Склад</td>
+                    <td rowspan="1">Тип топлива</td>
+                    <td rowspan="1">Владелец</td>
+                    <td rowspan="1">Конечный остаток</td>
+                </tr>
+                {% for b in base%}
+                <tr>
+                    {% if b.storage == 'НСП'%}
+                    <td class="storage">{{b.storage}}</td>
+                    <td class="type-oil">{{b.fuel}}</td>
+                    <td class="summ_fact_before_month">{{b.owner}}</td>
+                    <td class="summ_fact_month">{{b.balance}}</td>
+                    {%endif%}
+                </tr>
+                {% endfor%}
+            </tbody>
+        </table>
+    </div>
+    <!-- end НСП -->
+    <!-- КМРГ -->
+    <button class="accordion">Кубаньмежрайгаз</button>
+    <div class="panel">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td rowspan="1">Склад</td>
+                    <td rowspan="1">Тип топлива</td>
+                    <td rowspan="1">Владелец</td>
+                    <td rowspan="1">Конечный остаток</td>
+                </tr>
+                {% for b in base%}
+                <tr>
+                    {% if b.storage == 'Кубаньмежрайгаз'%}
+                    <td class="storage">{{b.storage}}</td>
+                    <td class="type-oil">{{b.fuel}}</td>
+                    <td class="summ_fact_before_month">{{b.owner}}</td>
+                    <td class="summ_fact_month">{{b.balance}}</td>
+                    {%endif%}
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+    <!-- end КМРГ -->
+    <!-- ХАБЛЬ -->
+    <button class="accordion">Кубаньмежрайгаз</button>
+    <div class="panel">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td rowspan="1">Склад</td>
+                    <td rowspan="1">Тип топлива</td>
+                    <td rowspan="1">Владелец</td>
+                    <td rowspan="1">Конечный остаток</td>
+                </tr>
+                {% for b in base%}
+                <tr>
+                    {% if 'Хабль' in b.storage%}
+                    <td class="storage">{{b.storage}}</td>
+                    <td class="type-oil">{{b.fuel}}</td>
+                    <td class="summ_fact_before_month">{{b.owner}}</td>
+                    <td class="summ_fact_month">{{b.balance}}</td>
+                    {%endif%}
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+    <!-- end Хабль-->
+</div>
+{%endif%}
 {% endblock %}
